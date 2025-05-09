@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Gallery & Slideshow</title>
+    <style>
+        /* Gallery */
+        .gallery img {
+            width: 80px;
+            margin: 6px;
+            cursor: pointer;
+            border: 2px solid #ccc;
+            transition: border 0.2s;
+        }
+        .gallery img:hover {
+            border: 2px solid #333;
+        }
+        .big-img {
+            width: 250px;
+            display: none;
+            margin-bottom: 10px;
+        }
+        input[type=radio] { display: none; }
+        #g1:checked ~ .big1,
+        #g2:checked ~ .big2,
+        #g3:checked ~ .big3 {
+            display: block;
+        }
+
+        /* Slideshow */
+        .slideshow {
+            width: 250px;
+            height: 150px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 30px;
+        }
+        .slides {
+            width: 1000px;
+            display: flex;
+            animation: slide 8s infinite;
+        }
+        .slides img {
+            width: 250px;
+            height: 150px;
+        }
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(0); }
+            33% { transform: translateX(-250px); }
+            58% { transform: translateX(-250px); }
+            66% { transform: translateX(-500px); }
+            91% { transform: translateX(-500px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <h3>Basic Image Gallery</h3>
+    <div>
+        <input type="radio" name="gallery" id="g1" checked>
+        <input type="radio" name="gallery" id="g2">
+        <input type="radio" name="gallery" id="g3">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" class="big-img big1">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" class="big-img big2">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" class="big-img big3">
+        <div class="gallery">
+            <label for="g1"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=80&q=80"></label>
+            <label for="g2"><img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=80&q=80"></label>
+            <label for="g3"><img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=80&q=80"></label>
+        </div>
+    </div>
+
+    <h3>Simple CSS Slideshow</h3>
+    <div class="slideshow">
+        <div class="slides">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80">
+            <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80">
+            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80">
+        </div>
+    </div>
+</body>
+</html>
