@@ -1,88 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>JavaScript Basics</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #eef2f3;
-    }
-
-    .btn {
-      padding: 10px 20px;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin: 10px 0;
-    }
-
-    .calculator {
-      margin-top: 20px;
-    }
-
-    input[type="number"] {
-      width: 80px;
-      padding: 5px;
-    }
-
-    #result {
-      font-weight: bold;
-      margin-top: 10px;
-    }
-  </style>
+    <title>Webpage using Javascript</title>
+    <style>
+        body {
+            background: #e2eafc;
+            font-family: Verdana, sans-serif;
+            padding: 40px;
+            color: #22223b;
+        }
+        .block {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #c9c9c9;
+            margin-bottom: 32px;
+            padding: 28px 24px;
+            max-width: 400px;
+        }
+        .my-btn {
+            padding: 12px 28px;
+            background: #4f8a8b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .my-btn.alt {
+            background: #ffb627;
+            color: #22223b;
+        }
+        .greet-btn {
+            padding: 10px 22px;
+            background: #a5a58d;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .calc-form input[type="number"] {
+            width: 85px;
+            padding: 7px;
+            margin-right: 8px;
+            border: 1px solid #bcbcbc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+        .calc-form button {
+            padding: 7px 16px;
+            background: #386641;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .calc-form button:hover {
+            background: #2b4730;
+        }
+        .output {
+            margin-top: 13px;
+            font-weight: 600;
+            color: #386641;
+        }
+    </style>
 </head>
-<body onload="showGreeting()">
+<body>
 
-  <h2>Button Color Changer</h2>
-  <button class="btn" onclick="changeColor(this)">Click Me</button>
+    <div class="block">
+        <h3>Color Switch Button</h3>
+        <button id="switchColor" class="my-btn">Tap to Change Color</button>
+    </div>
 
-  <h2>Greeting Alert</h2>
-  <p>(Alert will show when page loads)</p>
+    <div class="block">
+        <h3>Greeting Pop-up</h3>
+        <button class="greet-btn" onclick="displayGreeting()">Show Greeting</button>
+    </div>
 
-  <h2>Basic Calculator</h2>
-  <div class="calculator">
-    <input type="number" id="num1" placeholder="Number 1">
-    +
-    <input type="number" id="num2" placeholder="Number 2">
-    <button class="btn" onclick="calculate()">Add</button>
-    <p id="result">Result: </p>
-  </div>
+    <div class="block">
+        <h3>Addition Calculator</h3>
+        <form class="calc-form" id="sumForm">
+            <input type="number" id="valA" placeholder="Number 1" required>
+            <input type="number" id="valB" placeholder="Number 2" required>
+            <button type="submit">Sum</button>
+        </form>
+        <div class="output" id="sumResult"></div>
+    </div>
 
-  <script>
-    function changeColor(button) {
-      button.style.backgroundColor = '#2ecc71';
-    }
+    <script>
+        const colorBtn = document.getElementById('switchColor');
+        let isAlt = false;
+        colorBtn.addEventListener('click', function() {
+            isAlt = !isAlt;
+            if (isAlt) {
+                colorBtn.classList.add('alt');
+                colorBtn.textContent = "Back to Original";
+            } else {
+                colorBtn.classList.remove('alt');
+                colorBtn.textContent = "Tap to Change Color";
+            }
+        });
 
-    function showGreeting() {
-      const hour = new Date().getHours();
-      let greeting = "";
+        function displayGreeting() {
+            const time = new Date().getHours();
+            let msg = "";
+            if (time < 12) {
+                msg = "Good morning";
+            } else if (time < 18) {
+                msg = "Good afternoon";
+            } else {
+                msg = "Good evening";
+            }
+            alert(msg);
+        }
 
-      if (hour < 12) {
-        greeting = "Good Morning!";
-      } else if (hour < 18) {
-        greeting = "Good Afternoon!";
-      } else {
-        greeting = "Good Evening!";
-      }
-
-      alert(greeting);
-    }
-
-    function calculate() {
-      const num1 = parseFloat(document.getElementById("num1").value);
-      const num2 = parseFloat(document.getElementById("num2").value);
-
-      if (!isNaN(num1) && !isNaN(num2)) {
-        const sum = num1 + num2;
-        document.getElementById("result").textContent = "Result: " + sum;
-      } else {
-        document.getElementById("result").textContent = "Please enter valid numbers.";
-      }
-    }
-  </script>
+        document.getElementById('sumForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const a = parseFloat(document.getElementById('valA').value);
+            const b = parseFloat(document.getElementById('valB').value);
+            let resultText = "";
+            if (!isNaN(a) && !isNaN(b)) {
+                resultText = "Sum: " + (a + b);
+            } else {
+                resultText = "Please enter valid numbers.";
+            }
+            document.getElementById('sumResult').textContent = resultText;
+        });
+    </script>
 
 </body>
 </html>
